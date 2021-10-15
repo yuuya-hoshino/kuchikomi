@@ -10,6 +10,44 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2021_10_15_085528) do
+
+  create_table "agents", charset: "utf8", force: :cascade do |t|
+    t.integer "post_id"
+    t.integer "agent_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "posts", charset: "utf8", force: :cascade do |t|
+    t.text "contents"
+    t.integer "like"
+    t.integer "user_id"
+    t.integer "agent_id"
+    t.integer "review_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "reviews", charset: "utf8", force: :cascade do |t|
+    t.integer "post_id"
+    t.text "review"
+    t.float "star"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "users", charset: "utf8", force: :cascade do |t|
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "user_name", default: "", null: false
+    t.integer "admin", null: false
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["user_name"], name: "index_users_on_user_name", unique: true
+  end
 
 end
